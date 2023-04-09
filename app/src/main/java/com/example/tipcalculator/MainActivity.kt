@@ -8,7 +8,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -33,8 +33,12 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun TipTimeScreen(modifier : Modifier = Modifier){
-    Column(modifier = Modifier.padding(32.dp),
-    verticalArrangement = Arrangement.spacedBy(8.dp)) {
+    Column(modifier = Modifier
+        .padding(32.dp)
+        .fillMaxSize(),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Text(
             text = stringResource(id = R.string.calculate_tip),
             fontSize = 24.sp,
@@ -48,9 +52,12 @@ fun TipTimeScreen(modifier : Modifier = Modifier){
 }
 @Composable
 fun EditNumberField(modifier: Modifier = Modifier){
+    var amountInput by remember {
+        mutableStateOf("")
+    }
     TextField(
-        value = "",
-        onValueChange = {}
+        value = amountInput,
+        onValueChange = {amountInput = it},
     )
 }
 @Preview(showBackground = true)
